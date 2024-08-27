@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 // GET ALL CART
 export const getCarts = async () => {
-  const res = await axios.get("http://localhost:5000/carts");
+  const res = await axios.get(`${process.env.REACT_APP_API_URL}/carts`);
   return res.data;
 };
 
@@ -18,7 +18,7 @@ export const addToCart = async (product, price, amount, description, type) => {
     type,
   };
 
-  let res = await axios.post("http://localhost:5000/carts/", body, {
+  let res = await axios.post(`${process.env.REACT_APP_API_URL}/carts/`, body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -28,14 +28,14 @@ export const addToCart = async (product, price, amount, description, type) => {
 
 // ADD CART
 export const addCart = async (newCart) => {
-  const res = await axios.post("http://localhost:5000/", newCart);
+  const res = await axios.post(`${process.env.REACT_APP_API_URL}`, newCart);
   return res.data;
 };
 
 // UPDATE CART
 export const updateCart = async ({ id, quantity }) => {
   const res = await axios.put(
-    `http://localhost:5000/carts/${id}`,
+    `${process.env.REACT_APP_API_URL}/carts/${id}`,
     { quantity },
     {
       headers: {
@@ -48,7 +48,7 @@ export const updateCart = async ({ id, quantity }) => {
 
 // DELETE CART
 export const deleteItem = async (id) => {
-  const res = await axios.delete(`http://localhost:5000/carts/${id}`, {
+  const res = await axios.delete(`${process.env.REACT_APP_API_URL}/carts/${id}`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("authToken")}`,
     },
@@ -59,7 +59,7 @@ export const deleteItem = async (id) => {
 //EMPTY CART
 export const deleteCart = async () => {
   const token = Cookies.get("authToken");
-  let res = await axios.delete("http://localhost:5000/carts/", {
+  let res = await axios.delete(`${process.env.REACT_APP_API_URL}/carts/`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -71,6 +71,6 @@ export const deleteCart = async () => {
 //Chechout Cart
 export const checkoutCart = async ({userId}) => {
   console.log("id", userId)
-  const res = await axios.post(`http://localhost:5000/orders/${userId}`);
+  const res = await axios.post(`${process.env.REACT_APP_API_URL}/orders/${userId}`);
   return res.data;
 };

@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 export const getOrders = async () => {
     const token = Cookies.get("authToken");
   
-    let res = await axios.get("http://localhost:5000/orders/", {
+    let res = await axios.get(`${process.env.REACT_APP_API_URL}/orders/`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -16,7 +16,7 @@ export const getOrders = async () => {
 export const getOrdersAdmin = async () => {
     const token = Cookies.get("authToken");
   
-    let res = await axios.get("http://localhost:5000/orders/admin/", {
+    let res = await axios.get(`${process.env.REACT_APP_API_URL}/orders/admin/`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -32,7 +32,7 @@ export const checkout = async ({ total }) => {
     const body = {
         total
     };
-    let res = await axios.post("http://localhost:5000/orders/", body, {
+    let res = await axios.post(`${process.env.REACT_APP_API_URL}/orders/`, body, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
